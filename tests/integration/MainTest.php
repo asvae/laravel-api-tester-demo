@@ -108,7 +108,7 @@ class MainTest extends TestCase
 
         $this->seeJsonStructure([
             'data' => [
-                '*' => ['method', 'path', 'action'],
+                '*' => ['methods', 'path', 'action'],
             ],
         ]);
     }
