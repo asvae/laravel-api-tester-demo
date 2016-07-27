@@ -1,5 +1,5 @@
 <?php
 
 Route::get('/', function () {
-    return view('app.main');
+    return redirect('/api-tester');
 });
