@@ -4,26 +4,8 @@ use Asvae\ApiTester\Contracts\StorageInterface;
 use Asvae\ApiTester\Storages\JsonStorage;
 use Illuminate\Filesystem\Filesystem;
 
-class MainTest extends TestCase
+class RequestsTest extends TestCase
 {
-    public function test_page_is_displayed()
-    {
-        $this->visit('api-tester')->see('<vm-api-tester-main>');
-    }
-
-    public function test_page_is_not_displayed_when_disabled()
-    {
-        Config::set('api-tester.enabled', false);
-
-        $this->get('api-tester')->seeStatusCode(403);
-    }
-
-    public function test_assets_are_retrievable()
-    {
-        $this->get('api-tester/assets/api-tester.js')->seeStatusCode(200);
-        $this->get('api-tester/assets/api-tester.css')->seeStatusCode(200);
-    }
-
     public function test_requests_have_required_structure()
     {
         $this->stubStorage();
@@ -34,16 +16,16 @@ class MainTest extends TestCase
                     'headers' => [],
                     'method',
                     'params',
-                    'id'
+                    'id',
                 ],
-            ]
+            ],
         ]);
     }
 
     public function test_invalid_request_can_not_be_stored()
     {
         $this->post('api-tester/requests', [], [
-            'X-Requested-With' => 'XMLHttpRequest'
+            'X-Requested-With' => 'XMLHttpRequest',
         ])->seeStatusCode(422);
     }
 
@@ -58,15 +40,15 @@ class MainTest extends TestCase
             'method'  => 'GET',
             'headers' => ['some' => 'value'],
         ], [
-            'X-Requested-With' => 'XMLHttpRequest'
+            'X-Requested-With' => 'XMLHttpRequest',
         ])->seeStatusCode(201)->seeJsonStructure([
             'data' => [
                 'path',
                 'headers' => [],
                 'method',
                 'params',
-                'id'
-            ]
+                'id',
+            ],
         ]);
     }
 
@@ -75,7 +57,7 @@ class MainTest extends TestCase
         $this->stubStorage();
 
         $this->delete('api-tester/requests/1', [], [
-            'X-Requested-With' => 'XMLHttpRequest'
+            'X-Requested-With' => 'XMLHttpRequest',
         ])->seeStatusCode(204);
     }
 
@@ -89,7 +71,7 @@ class MainTest extends TestCase
             'method'  => 'POST',
             'headers' => ['some' => 'value'],
         ], [
-            'X-Requested-With' => 'XMLHttpRequest'
+            'X-Requested-With' => 'XMLHttpRequest',
         ])->seeStatusCode(200)->seeJson([
             "data" => [
                 'path'    => 'custom/path',
@@ -97,8 +79,8 @@ class MainTest extends TestCase
                 "params"  => null,
                 'headers' => ['some' => 'value'],
                 "body"    => null,
-                "id"      => 1
-            ]
+                "id"      => 1,
+            ],
         ]);
     }
 
@@ -115,40 +97,43 @@ class MainTest extends TestCase
 
     private function stubStorage()
     {
-        $storage = $this->getMock(JsonStorage::class, ['put', 'get'], [new Filesystem, '', '']);
+        $storage = $this->getMock(JsonStorage::class, ['put', 'get'],
+            [new Filesystem, '', '']);
 
-        $storage->expects($this->once())->method('get')->will($this->returnValue([
-            [
-                "path"    => "some/path",
-                "method"  => "GET",
-                "params"  => null,
-                "headers" => [
-                    "X-SS" => "sss"
+        $storage->expects($this->once())
+            ->method('get')
+            ->will($this->returnValue([
+                [
+                    "path"    => "some/path",
+                    "method"  => "GET",
+                    "params"  => null,
+                    "headers" => [
+                        "X-SS" => "sss",
+                    ],
+                    "body"    => null,
+                    "id"      => 1,
                 ],
-                "body"    => null,
-                "id"      => 1
-            ],
-            [
-                "path"    => "some/path",
-                "method"  => "GET",
-                "params"  => null,
-                "headers" => [
-                    "X-SS" => "sss"
+                [
+                    "path"    => "some/path",
+                    "method"  => "GET",
+                    "params"  => null,
+                    "headers" => [
+                        "X-SS" => "sss",
+                    ],
+                    "body"    => null,
+                    "id"      => 2,
                 ],
-                "body"    => null,
-                "id"      => 2
-            ],
-            [
-                "path"    => "some/path",
-                "method"  => "GET",
-                "params"  => null,
-                "headers" => [
-                    "X-SS" => "sss"
+                [
+                    "path"    => "some/path",
+                    "method"  => "GET",
+                    "params"  => null,
+                    "headers" => [
+                        "X-SS" => "sss",
+                    ],
+                    "body"    => null,
+                    "id"      => 3,
                 ],
-                "body"    => null,
-                "id"      => 3
-            ],
-        ]));
+            ]));
 
         app()->instance(StorageInterface::class, $storage);
 
