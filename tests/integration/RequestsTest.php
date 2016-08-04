@@ -15,7 +15,6 @@ class RequestsTest extends TestCase
                     'path',
                     'headers' => [],
                     'method',
-                    'params',
                     'id',
                 ],
             ],
@@ -46,7 +45,6 @@ class RequestsTest extends TestCase
                 'path',
                 'headers' => [],
                 'method',
-                'params',
                 'id',
             ],
         ]);
@@ -56,7 +54,7 @@ class RequestsTest extends TestCase
     {
         $this->stubStorage();
 
-        $this->delete('api-tester/requests/1', [], [
+        $this->delete('api-tester/requests/sdfsdfswerwer3wer2we2rsdfs', [], [
             'X-Requested-With' => 'XMLHttpRequest',
         ])->seeStatusCode(204);
     }
@@ -66,20 +64,18 @@ class RequestsTest extends TestCase
         $storage = $this->stubStorage();
         $storage->expects($this->once())->method('put');
 
-        $this->patch('api-tester/requests/1', [
+        $r = $this->patch('api-tester/requests/sdfsdfswerwer3wer2we2rsdfs', [
             'path'    => 'custom/path',
             'method'  => 'POST',
             'headers' => ['some' => 'value'],
         ], [
             'X-Requested-With' => 'XMLHttpRequest',
-        ])->seeStatusCode(200)->seeJson([
-            "data" => [
-                'path'    => 'custom/path',
-                'method'  => 'POST',
-                "params"  => null,
-                'headers' => ['some' => 'value'],
-                "body"    => null,
-                "id"      => 1,
+        ])->seeStatusCode(200)->seeJsonStructure([
+            'data' => [
+                'path',
+                'headers' => [],
+                'method',
+                'id',
             ],
         ]);
     }
@@ -111,7 +107,7 @@ class RequestsTest extends TestCase
                         "X-SS" => "sss",
                     ],
                     "body"    => null,
-                    "id"      => 1,
+                    "id"      => 'sdfsdfswerwer3wer2we2rsdfs',
                 ],
                 [
                     "path"    => "some/path",
@@ -121,7 +117,7 @@ class RequestsTest extends TestCase
                         "X-SS" => "sss",
                     ],
                     "body"    => null,
-                    "id"      => 2,
+                    "id"      => 'sdfsdfs12354werwer3wer2w',
                 ],
                 [
                     "path"    => "some/path",
@@ -131,7 +127,7 @@ class RequestsTest extends TestCase
                         "X-SS" => "sss",
                     ],
                     "body"    => null,
-                    "id"      => 3,
+                    "id"      => 'sdfsdfs12354werwer38we7r2',
                 ],
             ]));
 
