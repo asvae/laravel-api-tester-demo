@@ -17,8 +17,6 @@
     <link rel=”author” href=”https://github.com/asvae”/>
 </head>
 <body>
-<h1>Let's add some stuff</h1>
-
 <div id="api-tester">
     <vm-api-tester-main></vm-api-tester-main>
 </div>
