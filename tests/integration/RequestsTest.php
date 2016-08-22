@@ -3,60 +3,25 @@
 use Asvae\ApiTester\Contracts\StorageInterface;
 use Asvae\ApiTester\Storages\JsonStorage;
 use Illuminate\Filesystem\Filesystem;
+use Mockery as m;
 
 class RequestsTest extends TestCase
 {
-    public function test_requests_have_required_structure()
-    {
-        $this->stubStorage();
-        $this->get('api-tester/requests')->seeJsonStructure([
-            'data' => [
-                '*' => [
-                    'path',
-                    'headers' => [],
-                    'method',
-                    'id',
-                ],
-            ],
-        ]);
-    }
-
     public function test_invalid_request_can_not_be_stored()
     {
-        $this->post('api-tester/requests', [], [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ])->seeStatusCode(422);
+        $this->post('api-tester/requests', [])->seeStatusCode(422);
     }
 
     public function test_valid_request_can_be_stored()
     {
-        $storage = $this->stubStorage();
+        $request = $this->getSomeRequest();
 
-        $storage->expects($this->once())->method('put');
+        $this->post('api-tester/requests', $request)
+            ->seeStatusCode(201)
+            ->seeJsonStructure($request);
 
-        $this->post('api-tester/requests', [
-            'path'    => 'some_path/path',
-            'method'  => 'GET',
-            'headers' => ['some' => 'value'],
-        ], [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ])->seeStatusCode(201)->seeJsonStructure([
-            'data' => [
-                'path',
-                'headers' => [],
-                'method',
-                'id',
-            ],
-        ]);
-    }
-
-    public function test_request_can_be_deleted()
-    {
-        $this->stubStorage();
-
-        $this->delete('api-tester/requests/sdfsdfswerwer3wer2we2rsdfs', [], [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ])->seeStatusCode(204);
+        $this->delete('api-tester/requests/' . $request['id'])
+            ->seeStatusCode(204);
     }
 
     public function test_request_can_be_updated()
@@ -134,5 +99,19 @@ class RequestsTest extends TestCase
         app()->instance(StorageInterface::class, $storage);
 
         return $storage;
+    }
+
+    private function getSomeRequest()
+    {
+        $faker = Faker\Factory::create();
+
+        return [
+            "path"    => $faker->url,
+            "method"  => $faker->randomElement(['GET', 'get', 'post',]),
+            "params"  => null,
+            "headers" => ["X-SS" => $faker->numerify('#####'),],
+            "body"    => ['id' => $faker->randomNumber(5)],
+            "id"      => $faker->md5,
+        ];
     }
 }
