@@ -30,6 +30,11 @@ class DemoController extends Controller
         return $request->all();
     }
 
+    public function status(Request $request)
+    {
+        return app()->abort($request->status);
+    }
+
     public function redirect($times = 1)
     {
         if (! $times) {

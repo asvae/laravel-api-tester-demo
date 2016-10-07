@@ -161,7 +161,6 @@ return [
         /**
          * Vendor Service Providers
          */
-        Spatie\Fractal\FractalServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
         // Dev

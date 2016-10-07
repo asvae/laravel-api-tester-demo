@@ -17,19 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param  \Illuminate\Routing\Router  $router
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        //
-
-        parent::boot($router);
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param  \Illuminate\Routing\Router  $router
@@ -38,8 +25,6 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $this->mapWebRoutes($router);
-
-        //
     }
 
     /**
@@ -55,7 +40,23 @@ class RouteServiceProvider extends ServiceProvider
         $router->group([
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {
-            require app_path('Http/routes.php');
+            $router->get('/', function () {
+                return redirect('/api-tester');
+            });
+
+            $router->get('redirect/{times}', [
+                'as'   => 'redirect-test',
+                'uses' => 'DemoController@redirect',
+            ])->where('times', '[0-5]');
+            $router->get('json', 'DemoController@json');
+            $router->get('var_dump', 'DemoController@varDump');
+            $router->get('request', 'DemoController@request');
+            $router->get('status', 'DemoController@status');
+            $router->get('json', 'DemoController@json');
+            $router->get('string', 'DemoController@string');
+            $router->get('abort', 'DemoController@abort');
+            $router->get('i-dont-have-controller', 'MissingController@action');
+            $router->get('i-dont-have-action', 'DemoController@action');
         });
     }
 }

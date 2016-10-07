@@ -6,12 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
-        "barryvdh/laravel-debugbar": "v2.1.1",
-        "barryvdh/laravel-ide-helper": "v2.1.2",
-        "laravelcollective/html": "v5.2.4",
-        "doctrine/dbal": "v2.5.4",
-        "spatie/laravel-fractal": "1.9.0",
+        "laravel/framework": "5.3.*",
+        "barryvdh/laravel-debugbar": "2.*",
+        "barryvdh/laravel-ide-helper": "2.*",
+        "laravelcollective/html": "5.*",
+        "doctrine/dbal": "2.*",
         "asvae/laravel-api-tester": "dev-master",
         "ktamas77/firebase-php": "^2.2",
         "firebase/token-generator": "^3.0"
@@ -49,9 +48,7 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan clear-compiled",
             "php artisan ide-helper:generate",
-            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },
