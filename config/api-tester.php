@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'route' => 'loadsman',
+
     'enabled' => env('APP_DEBUG', false),
 
     'middleware' => [],

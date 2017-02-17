@@ -1,19 +1,18 @@
 {
-    "name": "asvae/laravel-boilerplate",
+    "name": "asvae/laravel-api-tester-demo",
     "description": "The Laravel Framework boilerplate",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.3.*",
+        "laravel/framework": "5.4.*",
         "barryvdh/laravel-debugbar": "2.*",
         "barryvdh/laravel-ide-helper": "2.*",
         "laravelcollective/html": "5.*",
         "doctrine/dbal": "2.*",
-        "asvae/laravel-api-tester": "dev-master",
         "ktamas77/firebase-php": "^2.2",
-        "firebase/token-generator": "^3.0"
+        "firebase/token-generator": "^3.0",
+        "greabock/maker": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -27,7 +26,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Asvae\\ApiTester\\": "laravel-api-tester/src/"
         }
     },
     "autoload-dev": {

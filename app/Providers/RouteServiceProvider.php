@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
                 return redirect('/api-tester');
             });
 
-            $router->get('redirect/{times}', [
+            $router->get('api/redirect/{times}', [
                 'as'   => 'redirect-test',
                 'uses' => 'DemoController@redirect',
             ])->where('times', '[0-5]');
@@ -54,6 +54,7 @@ class RouteServiceProvider extends ServiceProvider
             $router->get('status', 'DemoController@status');
             $router->get('json', 'DemoController@json');
             $router->get('string', 'DemoController@string');
+            $router->get('i-am-very-very/very/very/very/very/very/very/long-route/for-no-apparent-reason', 'DemoController@string');
             $router->get('abort', 'DemoController@abort');
             $router->get('i-dont-have-controller', 'MissingController@action');
             $router->get('i-dont-have-action', 'DemoController@action');

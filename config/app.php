@@ -162,6 +162,7 @@ return [
          * Vendor Service Providers
          */
         Collective\Html\HtmlServiceProvider::class,
+        Greabock\Maker\MakerServiceProvider::class,
 
         // Dev
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,

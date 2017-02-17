@@ -41,7 +41,7 @@ class DemoController extends Controller
             return 'Redirections done';
         }
 
-        return redirect()->route('redirect-test', ['times' => $times - 1]);
+        return redirect('http://localhost:8080/api/redirect/'.($times - 1));
     }
 
     public function string()
