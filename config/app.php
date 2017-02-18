@@ -171,7 +171,7 @@ return [
         /**
          * App
          */
-        Asvae\ApiTester\ServiceProvider::class,
+        Loadsman\Laravel\ServiceProvider::class,
     ],
 
     /*

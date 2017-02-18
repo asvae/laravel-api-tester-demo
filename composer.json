@@ -27,7 +27,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Asvae\\ApiTester\\": "laravel-api-tester/src/"
+            "Loadsman\\Laravel\\": "loadsman-laravel/src/"
         }
     },
     "autoload-dev": {
