@@ -27,7 +27,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Loadsman\\Laravel\\": "loadsman-laravel/src/"
+            "Loadsman\\Laravel\\": "loadsman-laravel/src/",
+            "Loadsman\\PHP\\": "loadsman-php/src/"
         }
     },
     "autoload-dev": {

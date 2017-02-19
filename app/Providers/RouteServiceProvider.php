@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {
             $router->get('/', function () {
-                return redirect('/api-tester');
+                return view('app.main');
             });
 
             $router->get('api/redirect/{times}', [
