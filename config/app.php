@@ -171,7 +171,7 @@ return [
         /**
          * App
          */
-        Loadsman\Laravel\ServiceProvider::class,
+        Loadsman\Laravel\LoadsmanServiceProvider::class,
     ],
 
     /*
