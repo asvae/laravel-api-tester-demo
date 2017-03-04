@@ -222,7 +222,6 @@ return [
          * Vendor
          */
         'Form'      => Collective\Html\FormFacade::class,
-        'Fractal'   => Spatie\Fractal\FractalFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
     ],
 

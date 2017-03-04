@@ -48,16 +48,16 @@ class RouteServiceProvider extends ServiceProvider
                 'as'   => 'redirect-test',
                 'uses' => 'DemoController@redirect',
             ])->where('times', '[0-5]');
-            $router->get('json', 'DemoController@json');
-            $router->get('var_dump', 'DemoController@varDump');
-            $router->get('request', 'DemoController@request');
-            $router->get('status', 'DemoController@status');
-            $router->get('json', 'DemoController@json');
-            $router->get('string', 'DemoController@string');
-            $router->get('i-am-very-very/very/very/very/very/very/very/long-route/for-no-apparent-reason', 'DemoController@string');
-            $router->get('abort', 'DemoController@abort');
-            $router->get('i-dont-have-controller', 'MissingController@action');
-            $router->get('i-dont-have-action', 'DemoController@action');
+            $router->get('api/json', 'DemoController@json');
+            $router->get('api/var_dump', 'DemoController@varDump');
+            $router->get('api/request', 'DemoController@request');
+            $router->get('api/status', 'DemoController@status');
+            $router->get('api/json', 'DemoController@json');
+            $router->get('api/string', 'DemoController@string');
+            $router->get('api/i-am-very-very/very/very/very/very/very/very/long-route/for-no-apparent-reason', 'DemoController@string');
+            $router->get('api/abort', 'DemoController@abort');
+            $router->get('api/i-dont-have-controller', 'MissingController@action');
+            $router->get('api/i-dont-have-action', 'DemoController@action');
         });
     }
 }

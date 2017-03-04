@@ -12,7 +12,8 @@
         "doctrine/dbal": "2.*",
         "ktamas77/firebase-php": "^2.2",
         "firebase/token-generator": "^3.0",
-        "greabock/maker": "^1.0"
+        "greabock/maker": "^1.0",
+        "filp/whoops": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
